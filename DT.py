@@ -19,9 +19,11 @@ def entropy(distribution):
 def impurity_1(left_label_hist, right_label_hist):
 	left, right = len(left_label_hist), len(right_label_hist)
 	return left / (left + right) * entropy(left_label_hist) + right (left + right) * entropy(right_label_hist)
+
+
 class DecisionTree:
 	head = None
-	def __init__(self, depth, impurity_func, segmentor_func):
+	def __init__(self, depth, impurity_func = impurity_1, segmentor_func = None):
 		self.depth = depth
 		self.impurity_func = impurity_func
 		self.segmentor_func = segmentor_func
