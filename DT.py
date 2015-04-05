@@ -11,10 +11,9 @@ def entropy(distribution):
 	samples = len(distribution)
 	if not samples:
 		return 0
-	positives = Float(reduce(lambda x, y: x + y, distribution)) / Float(samples)
+	positives = float(reduce(lambda x, y: x + y, distribution)) / float(samples)
 	negatives = 1 - positives
 	if not positives or not negatives:
-		print 'either positives or negatives is 0'
 		return 0
 	return -1 * (negatives * math.log(negatives) + positives * math.log(positives))
 def impurity_1(left_label_hist, right_label_hist):
