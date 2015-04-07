@@ -58,6 +58,14 @@ class DecisionTree:
 		self.head = Node()
 	def split(self, node, training_data, training_labels):
 		pass
+	def traverse(data):
+		node = self.head
+		while not node.label:
+			if data[node.split_rule[0]] <= split_rule[1]:
+				node = node.left
+			else:
+				node  = node.right
+		return node.label
 
 	def train(self, training_data, training_labels):
 		curr_depth = 0
