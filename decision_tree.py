@@ -29,8 +29,8 @@ def test_impurity():
 data = io.loadmat("./spam-dataset/spam_data.mat")
 labels, features = shuffle_and_resize(data)
 print features[1]
-# Dec = DT.DecisionTree(None, None, None)
-# Dec.predict(None)
+Dec = DT.DecisionTree()
+Dec.train(features, labels)
 test_impurity()
 print features.shape
 print DT.segmentor_1(features, labels, DT.impurity_1, None)
