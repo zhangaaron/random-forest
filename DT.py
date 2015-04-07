@@ -57,7 +57,21 @@ class DecisionTree:
 		self.segmentor_func = segmentor_func
 		self.head = Node()
 	def split(self, node, training_data, training_labels):
-		pass
+		node.split_rule = segmentor_func(training_data, training_labels, self.impurity_func)
+		left_data = []
+		left_label = []
+		right_data = []
+		right_label = []
+		for i in len(training_data):
+			if training_data[node.split_rule[0]] <= split_rule[1]:
+				left_data.append(training_data[i])
+				left_label.append(training_labels[i])
+			else:
+				right_data.append(training_data[i])
+				right_label.append(training_labels[i])
+		node.left = split(Node(), left_data, left_label)
+		node.right = split(Node(), right_data, right_label)
+		return node
 	def traverse(data):
 		node = self.head
 		while not node.label:
