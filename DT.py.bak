@@ -25,28 +25,9 @@ def best_threshold_func_1(feature, classification, impurity_func):
 	pass
 
 def segmentor_1(data, label, impurity_func, best_threshold_func):
-	split = (0, 0) # a tuple representing feature, threshold
-	best_score = float(1)
-	for i in range(data.shape[1]):
-		feature_column = data[i,:]
-		print 'feature_column', len(feature_column)
-		for j in feature_column:
-			left = []
-			right = []
-			for k in feature_column:
-				print 'j, k', j, k
-				if k <= j:
-					left.append(label[k])
-				else:
-					right.append(label[k])
-			k_impurity = impurity_func(left, right)
-			print 'left', len(left)
-			print 'right', len(right)
-			if k_impurity < best_score:
-				best_score = k_impurity
-				split = (i, k)
-	print 'best_score', best_score
-	return split
+	splits = {}
+	for feature_column, label in data, label:
+		print 'feature_column:', feature_column, 'label', label
 
 
 class DecisionTree:
@@ -81,3 +62,8 @@ class LNode(Node):
 		left = None
 		right = None
 		self.label = label
+
+
+
+
+
