@@ -51,12 +51,13 @@ def impurity_1(left_label_hist, right_label_hist):
 
 def segmentor_1(data, label, impurity_func):
     split = (0, 0)  # a tuple representing feature, threshold
+    print 'data shape, label shape', data.shape, label.shape
     best_score = float(1)
-    for i, feature_column in zip(range(data.shape[1]), data):
+    for i, feature_column in zip(xrange(data.shape[1]), data):
         for j in range(15):
             left = []
             right = []
-            for k, kth_feature_value in zip(range(len(feature_column)), feature_column):
+            for k, kth_feature_value in zip(xrange(len(feature_column)), feature_column):
                 # print 'j, k', j, k
                 if kth_feature_value <= j:
                     left.append(label[k])
