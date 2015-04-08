@@ -26,7 +26,6 @@ def segmentor_1(data, label, impurity_func):
 	best_score = float(1)
 	for i in range(data.shape[1]):
 		feature_column = data[i,:]
-		print 'feature_column', len(feature_column)
 		for j in feature_column:
 			left = []
 			right = []
@@ -54,21 +53,25 @@ class DecisionTree:
 		self.segmentor_func = segmentor_func
 		self.head = Node()
 	def split(self, node, training_data, training_labels, depth):
+		print 'split', depth
 		if depth == self.depth:
 			if (float(sum(training_labels))/len(training_labels)) > 0.5:
 				return LNode(1)
-			return LNode(0)			
+			return LNode(0)
 		node.split_rule = self.segmentor_func(training_data, training_labels, self.impurity_func)
-		left_data = []
+		left_data = np.empty([32, 0])
 		left_label = []
 		right_data = []
-		right_label = []
-		for i in len(training_data):
-			if training_data[node.split_rule[0]] <= split_rule[1]:
-				left_data.append(training_data[i])
+		right_label = np.empty([32, 0])
+		print 'left data shape ', left_data.shape
+		for i in range(len(training_data)):
+			print 'training_data to append ', training_data[i].shape
+			if training_data[i][node.split_rule[0]] <= node.split_rule[1]:
+				# left_data.append(training_data[i])
+				left_data = np.append(left_data, training_data[i], 1)
 				left_label.append(training_labels[i])
 			else:
-				right_data.append(training_data[i])
+				right_data = np.append(right_data, training_data[i], 1)
 				right_label.append(training_labels[i])
 		node.left = self.split(Node(), left_data, left_label, depth + 1)
 		node.right = self.split(Node(), right_data, right_label, depth + 1)
@@ -94,7 +97,6 @@ class Node:
 	left = None
 	right = None
 	split_rule = None
-	depth = 0
 	def __init__(self):
 		pass
 class LNode(Node):
