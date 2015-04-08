@@ -118,7 +118,7 @@ class DecisionTree:
     def traverse(self, data):
         node = self.head
         while not node.label:
-            if data[node.split_rule[0]] <= split_rule[1]:
+            if data[node.split_rule[0]] <= node.split_rule[1]:
                 node = node.left
             else:
                 node = node.right
@@ -137,14 +137,13 @@ class Node:
     left = None
     right = None
     split_rule = None
+    label = None
 
     def __init__(self):
         pass
 
 
 class LNode(Node):
-    label = None
-
     def __init__(self, label):
         left = None
         right = None
