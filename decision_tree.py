@@ -19,6 +19,7 @@ def shuffle_and_resize(data):
     np.random.shuffle(features)
     return labels, features
 
+
 def test_impurity():
     print DT.entropy([1, 1, 1, 0])
     print DT.entropy([])
@@ -28,14 +29,9 @@ def test_impurity():
 
 data = io.loadmat("./spam-dataset/spam_data.mat")
 labels, features = shuffle_and_resize(data)
-print features.shape
 Dec = DT.DecisionTree()
 a = 0
 b = 100000
-# for feature_vector in features:
-#     for item in feature_vector:
-#         a = max(a, item)
-#         b = min(b, item)
-# print 'max_reported feature', a
-# print 'min_reported feature', b
-Dec.train(features, labels)
+Dec.train(features[:1000,:], labels[:1000])
+reported_labels = Dec.predict(features)
+print score(labels, reported_labels)
