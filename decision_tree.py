@@ -5,6 +5,7 @@ from sklearn import datasets, svm, metrics
 from sklearn.cross_validation import train_test_split
 import matplotlib.pyplot as plt
 import DT
+import DF
 
 
 def shuffle_and_resize(data):
@@ -29,7 +30,10 @@ def test_impurity():
 
 data = io.loadmat("./spam-dataset/spam_data.mat")
 labels, features = shuffle_and_resize(data)
-Dec = DT.DecisionTree()
-Dec.train(features[:1000,:], labels[:1000])
-reported_labels = Dec.predict(features)
-print score(labels, reported_labels)
+print data['test_data'].shape
+DecisionF = DF.DecisionForest()
+DecisionF.train(features, labels)
+predicted = DecisionF.predict(data['test_data'])
+file_to_write = open('kaggle_predictions', 'wb')
+for i, value in zip(xrange(1, len(predicted) + 1), predicted):
+    file_to_write.write("%d,%d\n" % (i, value))
