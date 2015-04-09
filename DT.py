@@ -102,6 +102,7 @@ class DecisionTree:
         left_set = Data(np.empty([0, 32]), [])
         # left_data = np.empty([0, 32])
         # left_label = []
+        right_set = Data(np.empty([0, 32], [])
         right_data = np.empty([0, 32])
         right_label = []
         for i, row in zip(xrange(len(training_data)), training_data):
