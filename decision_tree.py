@@ -30,7 +30,6 @@ def test_impurity():
 data = io.loadmat("./spam-dataset/spam_data.mat")
 labels, features = shuffle_and_resize(data)
 Dec = DT.DecisionTree()
-
-# Dec.train(features[:1000,:], labels[:1000])
-# reported_labels = Dec.predict(features)
-# print score(labels, reported_labels)
+Dec.train(features[:1000,:], labels[:1000])
+reported_labels = Dec.predict(features)
+print score(labels, reported_labels)
